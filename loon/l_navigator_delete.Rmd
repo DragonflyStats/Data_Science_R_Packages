@@ -1,0 +1,29 @@
+---
+title: "``l_navigator_delete``"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(loon)
+```
+
+### Delete a Navigator
+
+#### Description 
+
+Removes a navigator from a graph widget
+
+#### Usage
+<pre><code>
+
+l_navigator_delete(widget, id)
+
+</code></pre>
+#### Arguments 
+
+* widget graph widget
+* id navigator handle or navigator id
+
+#### See Also
+``l_navigator_add``

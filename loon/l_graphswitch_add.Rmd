@@ -1,0 +1,37 @@
+---
+title: "``l_graphswitch_add``"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(loon)
+```
+
+Add a graph to a graphswitch widget
+
+#### Description 
+
+This is a generic function to add a graph to a graphswitch widget.
+
+#### Usage
+<pre><code>
+
+l_graphswitch_add(widget, graph, ...)
+
+</code></pre>
+#### Arguments 
+
+* ``widget``: widget path as a string or as an object handle
+* ``graph``: a graph or a loongraph object
+* ``...```: arguments  passed on to method
+
+#### Details 
+
+For more information run: l_help("learn_R_display_graph.html#graph-switch-widget")
+
+#### Value
+id for graph in the graphswitch widget
+
+#### See Also
+``l_graphswitch``
