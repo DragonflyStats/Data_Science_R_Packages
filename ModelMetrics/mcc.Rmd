@@ -1,0 +1,66 @@
+mcc Matthews Correlation Coefficient
+
+#### Description  
+
+Calculates the Matthews Correlation Coefficient
+
+#### Usage  
+<pre><code>
+
+mcc(actual, predicted, cutoff)
+
+</code></pre>
+#### Arguments
+
+* ``actual``: A vector of the labels
+* ``predicted``:  A vector of predicted values
+cutoff A cutoff for the predicted values
+mlogLoss 11
+mlogLoss Multiclass Log Loss
+
+#### Description  
+
+Calculated the multi-class log loss
+
+#### Usage  
+<pre><code>
+
+mlogLoss(actual, predicted)
+
+</code></pre>
+#### Arguments
+
+* ``actual``: A vector of the labels. Can be numeric, character, or factor
+predicted matrix of predicted values. Can be matrix, data.frame
+* ``mse ``:  Mean Square Error
+
+#### Description  
+
+Calculates the mean square error
+
+#### Usage  
+<pre><code>
+
+mse(...)
+## Default S3 method:
+mse(actual, predicted, ...)
+## S3 method for class 'lm'
+mse(modelObject, ...)
+## S3 method for class 'glm'
+mse(modelObject, ...)
+
+</code></pre>
+#### Arguments
+
+... additional parameters to be passed the the s3 methods
+* ``actual``: A vector of the labels
+* ``predicted``:  A vector of predicted values
+* ``modelObject``:  the model object. Currently supported lm
+12 msle
+
+#### Examples  
+
+data(testDF)
+glmModel <- glm(y ~ ., data = testDF, family="binomial")
+Preds <- predict(glmModel, type = 'response')
+mse(testDF$y, Preds)

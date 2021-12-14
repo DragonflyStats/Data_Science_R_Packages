@@ -1,0 +1,106 @@
+logLoss Log Loss
+
+#### Description  
+
+Calculates the log loss or entropy loss for a binary outcome
+
+#### Usage  
+<pre><code>
+
+logLoss(...)
+## Default S3 method:
+logLoss(actual, predicted, distribution = "binomial", ...)
+## S3 method for class 'glm'
+logLoss(modelObject, ...)
+## S3 method for class 'randomForest'
+logLoss(modelObject, ...)
+## S3 method for class 'glmerMod'
+logLoss(modelObject, ...)
+## S3 method for class 'gbm'
+logLoss(modelObject, ...)
+## S3 method for class 'rpart'
+logLoss(modelObject, ...)
+
+</code></pre>
+#### Arguments
+
+... additional parameters to be passed the the s3 methods
+actual a binary vector of the labels
+predicted a vector of predicted values
+distribution the distribution of the loss function needed binomial, poisson
+* ``modelObject``:  the model object. Currently supported glm, randomForest, glmerMod, gbm
+
+#### Examples  
+
+data(testDF)
+glmModel <- glm(y ~ ., data = testDF, family="binomial")
+Preds <- predict(glmModel, type = 'response')
+logLoss(testDF$y, Preds)
+# using s3 method for glm
+logLoss(glmModel)
+mae 9
+mae Mean absolute error
+
+#### Description  
+
+Calculates the mean absolute error
+
+#### Usage  
+<pre><code>
+
+mae(...)
+## Default S3 method:
+mae(actual, predicted, ...)
+## S3 method for class 'glm'
+mae(modelObject, ...)
+## S3 method for class 'randomForest'
+mae(modelObject, ...)
+## S3 method for class 'glmerMod'
+mae(modelObject, ...)
+## S3 method for class 'gbm'
+mae(modelObject, ...)
+## S3 method for class 'rpart'
+mae(modelObject, ...)
+
+</code></pre>
+#### Arguments
+
+... additional parameters to be passed the the s3 methods
+* ``actual``: A vector of the labels
+* ``predicted``:  A vector of predicted values
+* ``modelObject``:  the model object. Currently supported glm, randomForest, glmerMod, gbm
+* ``mauc``: Multiclass Area Under the Curve
+
+#### Description  
+
+Calculates the area under the curve for a binary classifcation model
+10 mcc
+
+#### Usage  
+<pre><code>
+
+mauc(actual, predicted)
+
+</code></pre>
+#### Arguments
+
+* ``actual``: A vector of the labels. Can be numeric, character, or factor
+* ``predicted``: A data.frame of predicted values. Can be matrix, data.frame
+
+#### Examples  
+
+```{r}
+setosa <- glm(I(Species == 'setosa') ~ Sepal.Length, data = iris, family = 'binomial')
+versicolor <- glm(I(Species == 'versicolor') ~ Sepal.Length, data = iris, family = 'binomial')
+virginica <- glm(I(Species == 'virginica') ~ Sepal.Length, data = iris, family = 'binomial')
+Pred <-
+  data.frame(
+    setosa = predict(setosa, type = 'response')
+    ,versicolor = predict(versicolor, type = 'response')
+    ,virginica = predict(virginica, type = 'response')
+  )
+Predicted = Pred/rowSums(Pred)
+Actual = iris$Species
+mauc(Actual, Predicted)
+```
+

@@ -1,0 +1,81 @@
+brier Brier Score
+
+#### Description  
+
+Calculates the Brier score
+
+#### Usage  
+<pre><code>
+
+brier(...)
+## Default S3 method:
+brier(actual, predicted, ...)
+## S3 method for class 'glm'
+brier(modelObject, ...)
+## S3 method for class 'randomForest'
+brier(modelObject, ...)
+## S3 method for class 'glmerMod'
+brier(modelObject, ...)
+## S3 method for class 'gbm'
+brier(modelObject, ...)
+## S3 method for class 'rpart'
+brier(modelObject, ...)
+4 ce
+
+</code></pre>
+#### Arguments
+
+... additional parameters to be passed the the s3 methods
+* ``actual``: A vector of the labels
+* ``predicted``:  A vector of predicted values
+* ``modelObject``:  the model object. Currently supported glm, randomForest, glmerMod, gbm
+ce Classification error
+
+#### Description  
+
+Calculates the classification error
+
+#### Usage  
+<pre><code>
+
+ce(...)
+## Default S3 method:
+ce(actual, predicted, ...)
+## S3 method for class 'lm'
+ce(modelObject, ...)
+## S3 method for class 'glm'
+ce(modelObject, ...)
+## S3 method for class 'randomForest'
+ce(modelObject, ...)
+## S3 method for class 'glmerMod'
+ce(modelObject, ...)
+## S3 method for class 'gbm'
+ce(modelObject, ...)
+## S3 method for class 'rpart'
+ce(modelObject, ...)
+
+</code></pre>
+#### Arguments
+
+... additional parameters to be passed the the s3 methods
+* ``actual``: A vector of the labels
+* ``predicted``:  A vector of predicted values
+* ``modelObject``:  the model object. Currently supported lm, glm, randomForest, glmerMod, gbm, rpart
+confusionMatrix 5
+confusionMatrix Confusion Matrix
+
+#### Description  
+
+Create a confusion matrix given a specific cutoff.
+
+#### Usage  
+<pre><code>
+
+confusionMatrix(actual, predicted, cutoff = 0.5)
+
+</code></pre>
+#### Arguments
+
+* ``actual``: A vector of the labels
+* ``predicted``:  A vector of predicted values
+cutoff A cutoff for the predicted values
