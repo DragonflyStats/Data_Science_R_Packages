@@ -1,0 +1,14 @@
+
+---
+
+### Technology Acceptance Model
+
+* PU
+* PEOU
+
+---
+
+### Lazy User Model
+
+LUM
+

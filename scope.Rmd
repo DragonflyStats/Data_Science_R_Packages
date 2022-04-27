@@ -1,0 +1,34 @@
+---
+title: "OSUN R Users Community"
+subtitle: "Kevin O'Brien"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+### Scope
+ - Mainly focussing on item-wise diagnostics 
+
+
+### Out of Scope
+ - Not going into Feature Selection in Details
+ - One-hot Encooding / Model Matrices
+ - Log Transformation
+ - Box-Cox Transformation
+
+
+---
+
+### {yardstick}
+
+Not Really Covering Machine Learning or Binary Classifers
+ 
+* Accuracy, Precision, Recall and F-Score
+* NPV, PPV
+* Lift and Gain Curves
+
+Includes a lot of functionality for standard regression model metrics
+

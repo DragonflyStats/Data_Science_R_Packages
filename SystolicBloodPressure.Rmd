@@ -1,0 +1,30 @@
+---
+title: "OSUN R Users Community"
+subtitle: "Kevin O'Brien"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+
+```{r message=FALSE, warning=FALSE,echo=FALSE}
+library(MethComp)
+library(tidyverse)
+library(magrittr)
+data("sbp")
+```
+```{r echo=FALSE}
+
+head(sbp)
+```
+
+#### Breakdown
+
+```{r}
+
+sbp %>% group_by(meth,repl) %>% tally() 
+
+```

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>OSUN R Users Community</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# OSUN R Users Community
+## Kevin O’Brien
+
+---
+
+
+
+### About me
+* Kevin O'Brien
+* Forestry Data Scientist based in the West of Ireland 
+  - Also in London, UK a lot
+* R is very useful in Forestry - Statistical Analysis and Data Visualization
+* Other R packages have been ***VERY*** useful 
+
+---
+
+![Limerick City](Limerick.jpg)
+
+
+---
+
+### My career
+
+Former University Lecturer of Mathematics and Statistics. 
+
+####  Motivation
+* Career young data scientists, mathematicians and statisticians. 
+* Job interviews. 
+* Career advice. 
+* Professional development. 
+
+#### Students
+* Maths and Statistics Students (Teaching R)
+* Health sciences, Life Sciences, Equine science, Sports Science, Food science, Biochemistry 
+
+(Emphasizing the second group more - as those subjects area have very interesting real-world applications.)
+
+---
+
+### Topics
+
+* Statistics 101
+* Exploratory Data Analysis
+* Linear models. 
+  * Robust, Polynomial Regression
+  * Model Metrics
+* Experimental design. 
+* Linear Mixed Effects models. 
+* Non-Parametric Statistics.
+* Statistical Process Control.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Scope
+ - Mainly focussing on item-wise diagnostics 
+
+
+### Out of Scope
+ - Not going into Feature Selection in Details
+ - One-hot Encooding / Model Matrices
+ - Log Transformation
+ - Box-Cox Transformation
+
+
+---
+
+### {yardstick}
+
+Not Really Covering Machine Learning or Binary Classifers
+ 
+* Accuracy, Precision, Recall and F-Score
+* NPV, PPV
+* Lift and Gain Curves
+
+Includes a lot of functionality for standard regression model metrics
+
+
+---
+
+### Pedagogical Effects on Statistics
+
+(More the general science students, rather than the Maths Science students)
+
+* Designing a Statistics course is an exercises in compromise, particularly Statistics 101 courses. For the curriculum design in universities, some choices are made that reflect scheduling needs. 
+
+* 12-14 Week semesters with 2 or 3 lectures per week. Many students will have only 1, but maybe 2 Statistics Modules in their 4 year degree programme.
+
+* Many would benefit from far more Statistics and Statistical Computing content on their curriculum.
+
+* Lecturers must create a pen-and-paper exam paper at the end of the semester, with a transparent rubric. Conventions must be followed.
+
+* Example: You ***MUST*** cover the Normal Distribution - but you are caught for time to explain all the reasons ***WHY*** it is so important to know.
+
+* DANGER! Pedagogical design can create misconceptions about the relative importance of various statistical topics. 
+
+
+
+---
+
+### Job Advertisement (Financial Services)
+
+The Data Scientist has a deep statistical knowledge and strong quantitative skills who will work as part of the Model Validation team to independently evaluate the efficacy of the design and implementation of [COMPANY]’s high performance modeling solutions across our Big Data analytics landscape.
+
+
+Quantitative models support some of the most important processes and decisions at [COMPANY], and the Model Validation team is responsible for their effective challenge. 
+
+The Model Validation team conducts testing and provides a ***critical review of conceptual soundness and model performance***, producing technical reports describing the results of validation, and interface with internal stakeholders and regulators to communicate findings in model risk. 
+
+The Model Validation team assesses all models across [COMPANY] and this role offers the unique opportunity to acquire a wide variety of experience of different models supporting a wide range of relevant processes including credit risk, fraud etc. 
+
+
+---
+
+
+### Job Advertisement (Financial Services)
+
+#### (Continued)
+
+You will be responsible for sourcing and generating validation datasets, analysis and critical review of related data, assessment of model performance and ultimately delivering validation reports on the status of the underlying models. You will work with a wide, diverse range of data science/model development teams. 
+
+You will have the opportunity to work with one of the world’s largest financial datasets and the most advanced analytics and machine learning approaches that deliver near real-time predictions and recommendations.
+
+---
+
+
+
+
+
+---
+
+### Technology Acceptance Model
+
+* PU
+* PEOU
+
+---
+
+### Lazy User Model
+
+LUM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```r
+library(lindia)
+```
+
+```
+## Warning: package 'lindia' was built under R version 4.0.5
+```
+
+
+```r
+library(MASS)
+data(Cars93)
+
+dim(Cars93)
+```
+
+```
+## [1] 93 27
+```
+
+```r
+names(Cars93)
+```
+
+```
+##  [1] "Manufacturer"       "Model"              "Type"              
+##  [4] "Min.Price"          "Price"              "Max.Price"         
+##  [7] "MPG.city"           "MPG.highway"        "AirBags"           
+## [10] "DriveTrain"         "Cylinders"          "EngineSize"        
+## [13] "Horsepower"         "RPM"                "Rev.per.mile"      
+## [16] "Man.trans.avail"    "Fuel.tank.capacity" "Passengers"        
+## [19] "Length"             "Wheelbase"          "Width"             
+## [22] "Turn.circle"        "Rear.seat.room"     "Luggage.room"      
+## [25] "Weight"             "Origin"             "Make"
+```
+
+---
+
+
+```r
+cars_lm &lt;- lm(Price ~ Passengers + Length + RPM, data = Cars93)
+
+summary(cars_lm)
+```
+
+```
+## 
+## Call:
+## lm(formula = Price ~ Passengers + Length + RPM, data = Cars93)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -10.823  -5.494  -1.532   4.197  39.773 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -73.466556  17.374752  -4.228 5.69e-05 ***
+## Passengers   -1.605429   0.972676  -1.651   0.1024    
+## Length        0.451499   0.068189   6.621 2.61e-09 ***
+## RPM           0.003489   0.001650   2.115   0.0373 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.023 on 89 degrees of freedom
+## Multiple R-squared:  0.3327,	Adjusted R-squared:  0.3102 
+## F-statistic: 14.79 on 3 and 89 DF,  p-value: 6.811e-08
+```
+
+---
+
+
+```r
+gg_cooksd(cars_lm)
+```
+
+![](OSUN_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+---
+
+
+```r
+gg_diagnose(cars_lm)
+```
+
+```
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](OSUN_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+
+---
+
+
+
+```r
+gg_resX(cars_lm)
+```
+
+![](OSUN_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+---
+
+
+```r
+gg_qqplot(cars_lm) 
+```
+
+![](OSUN_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+
+---
+
+
+```r
+gg_resfitted(cars_lm) 
+```
+
+![](OSUN_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+
+
+
+
+
+
+---
+
+
+
+```r
+gg_boxcox(cars_lm)
+```
+
+![](OSUN_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Method Comparison Studies
+
+* Graphical Techniques
+* Deming / Orthonormal Regression
+* LME Models
+  * {nlme} and {lme4}
+* Systolic Blood Pressure Data
+* Influence Analysis and Regression Analysis
+  * DFBETAs
+
+---
+
+## Bland-Altman 1986
+
+#### Statistical methods for assessing agreement between two methods of clinical measurement
+
+51,232 Citations
+
+
+![Bland-Altman 1986 Citations](BlandAltmanCite.PNG)
+
+
+---
+
+
+### Bland-Altman Plot
+
+For two vectors of equal length representing measurements of the same quantity by two different
+methods, the differences are plotted versus the average. The limits of agreement (prediction limits
+for the differences) are plotted, optionally a regression of differences of means is given too.
+
+
+```r
+library(MethComp)
+data( ox )
+ox &lt;- Meth( ox )
+# The simplest possible Bland-Altman plot
+BA.plot( ox )
+```
+
+
+```
+## Warning: package 'MethComp' was built under R version 4.0.5
+```
+
+---
+### ***ox***- Measurement of oxygen saturation in blood
+61 children had their blood oxygen content measured at the Children’s Hospital in Melbourne,
+either with a chemical method analysing gases in the blood (CO) or by a pulse oximeter measuring
+transcutaneously (pulse). 
+
+
+
+#### 61 items - 3 replicate measurements each
+
+```
+## # A tibble: 4 x 3
+## # Groups:   meth [1]
+##   meth   item     n
+##   &lt;fct&gt; &lt;dbl&gt; &lt;int&gt;
+## 1 pulse    58     3
+## 2 pulse    59     3
+## 3 pulse    60     3
+## 4 pulse    61     3
+```
+
+#### Example of Data
+
+```
+##   meth item repl    y
+## 1   CO    1    1 78.0
+## 2   CO    1    2 76.4
+## 3   CO    1    3 77.2
+## 4   CO    2    1 68.7
+```
+
+---
+
+
+```r
+ox %&gt;%  mutate(meth=as.character(meth),item=as.character(item))%&gt;%
+ pivot_wider(id_cols=c(item,repl),names_from="meth",values_from="y") %&gt;% ggplot(aes(x=CO,y=pulse)) + 
+  geom_point(pch=16,col="red") + theme_bw()
+```
+
+![](OSUN_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+
+---
+
+
+### Bland-Altman Plot
+
+![](OSUN_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+
+---
+
+
+
+
+
+
+
+
+---
+
+### Useful R packages
+
+in addition to tidyverse
+
+* janitor
+* broom
+* scales
+* flashlight: Shed Light on Black Box Machine Learning Models
+
+
+---
+
+### auctestr: Statistical Testing for AUC Data
+
+Performs statistical testing to compare predictive models based on multiple observations of the A' statistic (also known as Area Under the Receiver Operating Characteristic Curve, or AUC). 
+
+Specifically, it implements a testing method based on the equivalence between the A' statistic and the Wilcoxon statistic. 
+
+---
+
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

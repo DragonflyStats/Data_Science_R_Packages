@@ -1,0 +1,23 @@
+
+---
+
+### Useful R packages
+
+in addition to tidyverse
+
+* janitor
+* broom
+* scales
+* flashlight: Shed Light on Black Box Machine Learning Models
+
+
+---
+
+### auctestr: Statistical Testing for AUC Data
+
+Performs statistical testing to compare predictive models based on multiple observations of the A' statistic (also known as Area Under the Receiver Operating Characteristic Curve, or AUC). 
+
+Specifically, it implements a testing method based on the equivalence between the A' statistic and the Wilcoxon statistic. 
+
+---
+
