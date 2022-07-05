@@ -9,7 +9,10 @@ output:
       countIncrementalSlides: false
 ---
 
-```{r}
+
+![Lindia R Package](lindia-cran.PNG)
+
+```{r warning=FALSE,message=FALSE}
 library(lindia)
 
 ```
@@ -87,4 +90,4 @@ gg_boxcox(cars_lm)
 
 ```
 
-
+---

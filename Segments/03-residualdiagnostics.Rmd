@@ -1,25 +1,47 @@
+---
+title: "OSUN R Users Community"
+subtitle: "Kevin O'Brien"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      countIncrementalSlides: false
+---
 
-Regression Diagnostics:avPlots
-==========================
+### Regression Diagnostics:avPlots
 
-#### `avPlots`
+#### <tt>avPlots</tt>
 
 *  Graphs outcome vs predictor variables holding the rest constant (also called partial-regression plots)
 *  Help identify the effect(or influence) of an observation on the regression coefficient of the predictor variable
 
-Regression Diagnostics: avPlots
-===================================
+---
 
-```{r}
+### Regression Diagnostics:avPlots
+
+```{r eval=FALSE}
 library(car)
 reg1 <-lm(prestige ~ education + income + type, data = Prestige)
 avPlots(reg1)
 
 ```
-Regression Diagnostics: `influenceIndexPlot()`
-===================================
+---
 
-#### `influenceIndexPlot`
+### Regression Diagnostics:avPlots
+
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+library(car)
+reg1 <-lm(prestige ~ education + income + type, data = Prestige)
+avPlots(reg1)
+
+```
+---
+
+### Regression Diagnostics: <tt>influenceIndexPlot()</tt>
+
+
+#### <tt>influenceIndexPlot()</tt>
 
 *  Cook's distance measures how much an observation influences the overall model or predicted values
 *  Studentizided residuals are the residuals divided by their estimated standard deviation as a way to standardized
@@ -27,10 +49,28 @@ Regression Diagnostics: `influenceIndexPlot()`
 *  Hat-points identify influential observations (have a high impact on the predictor variables)
 
 
-Regression Diagnostics :`influenceIndexPlot()`
-===================================
+---
 
-```{r}
+### Regression Diagnostics: <tt>influenceIndexPlot()</tt>
+
+
+#### <tt>influenceIndexPlot()</tt>
+
+```{r eval=FALSE}
+library(car)
+reg1 <-lm(prestige ~ education + income + type, data = Prestige)
+influenceIndexPlot(reg1)
+
+```
+
+---
+
+### Regression Diagnostics: <tt>influenceIndexPlot()</tt>
+
+
+#### <tt>influenceIndexPlot()</tt>
+
+```{r echo=FALSE,message=FALSE,warning=FALSE}
 library(car)
 reg1 <-lm(prestige ~ education + income + type, data = Prestige)
 influenceIndexPlot(reg1)
@@ -39,22 +79,32 @@ influenceIndexPlot(reg1)
 
 
 
+---
 
 #### `influencePlot`
 
-*  `influencePlot()` creates a bubble-plot combining the display of Studentizedresiduals, hat-values, and Cook's distance (represented in the circles).
+*  <tt>influencePlot()</tt> creates a bubble-plot combining the display of Studentizedresiduals, hat-values, and Cook's distance (represented in the circles).
 
 
 
-```{r ,out.width = "80%" }
+```{r eval=FALSE }
 library(car)
 reg1 <-lm(prestige ~ education + income + type, data = Prestige)
 influencePlot(reg1)
 ```
 
+---
 
-Alcohol and Tobacco Data
-========================================
+
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+library(car)
+reg1 <-lm(prestige ~ education + income + type, data = Prestige)
+influencePlot(reg1)
+```
+
+---
+### Alcohol and Tobacco Data
+
 This example is for exposition only. We will ignore the fact that this may not be a great way of modeling the this particular set of data!
 
 
@@ -74,10 +124,10 @@ row.names = c("North", "Yorkshire", "Northeast",
 
 ```
 
+---
 
 
-
-```{r ,out.width = "80%" }
+```{r echo=FALSE }
 alctobwo <- subset(alctob,rownames(alctob)!="N. Ireland") 
 #without North Ireland
 
@@ -90,23 +140,27 @@ pch=16,col="red",cex=1.5,font.lab=2)
 
 ```
 
+---
 
 ```{r}
 fit1 <- lm( Alcohol ~ Tobacco, data = alctob)
 fit2 <- lm( Alcohol ~ Tobacco, data = alctobwo)
 ```
+
+---
+
 All Observations
-=================================================
+
 
 ```{r}
 summary(fit1)
 
 
 ```
-
+---
 
 Outlier Removed
-============================================
+
 ```{r}
 
 summary(fit2)
@@ -114,29 +168,34 @@ summary(fit2)
 
 
 ```
+---
+
+
+### Outliers
 
 
 
-Outliers
-==============
-
-
-
-The conservative outlier test that we talked about in class uses the
+The conservative outlier test uses the
 Bonferonni inequality to calculate the p-values we associate with the
 Student's-t test. 
 
-In R, we can use the `outlierTest()`` command to perform this
-test on our model. Remember that when we test for influence, we are testing
+In R, we can use the <tt>outlierTest()</tt> command to perform this
+test on our model. 
+
+Remember that when we test for influence, we are testing
 the effect of an observation on model coefficients. 
 
+---
+
 Therefore we need to
-give the outlierTest command a linear model as its input.
+give the <tt>outlierTest</tt> command a linear model as its input.
 
 ```{r}
 outlierTest(fit1)
  
 ```
+
+---
 
 We can also use R to calculate Cook's distance. 
 Here we label any observation with Cook's distance greater than 1 as influential.
@@ -146,8 +205,10 @@ cooks.distance(fit1)
 
 ```
 
-Influence Plots
-============
+---
+
+### Influence Plots
+
 
 Finally, one of the easier ways to evaluate our residuals and look for
 for influential points is through plots. 
@@ -158,8 +219,10 @@ for influential points is through plots.
 qqPlot(fit1, main="QQ Plot",pch=18, lim=c(-3,2)) 
 ```
 
-Influence Plots
-============
+
+---
+
+### Influence Plots
 
 
 ```{r ,out.width = "80%" }
@@ -169,29 +232,39 @@ leveragePlots(fit1)
 
 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE,message=FALSE,warning=FALSE}
 fit <- fit1
 ```
 
 
+---
 
+### Influence Plots
 
-Influence Plots
-============
+```{r eval=FALSE}
 
-
-```{r}
-# Influential Observations
 # Influential Observations
 # added variable plots 
 avPlots(fit1)
 
 ```
 
-Influence Plots
-============
+---
 
-```{r}
+### Influence Plots
+
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+# Influential Observations
+# Influential Observations
+# added variable plots 
+avPlots(fit1)
+
+```
+---
+
+### Influence Plots
+
+```{r eval=FALSE}
 # Cook's D plot
 # identify D values > 4/(n-k-1) 
 cutoff <- 4/((nrow(mtcars)-length(fit1$coefficients)-2)) 
@@ -199,10 +272,23 @@ plot(fit, which=4, cook.levels=cutoff)
 
 ```
 
-Influence Plots
-============
+---
 
-```{r}
+### Influence Plots
+
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+# Cook's D plot
+# identify D values > 4/(n-k-1) 
+cutoff <- 4/((nrow(mtcars)-length(fit1$coefficients)-2)) 
+plot(fit, which=4, cook.levels=cutoff)
+
+```
+
+---
+
+### Influence Plots
+
+```{r eval=FALSE}
 # Influence Plot 
 influencePlot(fit1,id.method="identify", 
 main="Influence Plot", 
@@ -210,31 +296,24 @@ col="red",
 sub="Circle size is proportial to Cook's Distance" )
 
 ```
+---
 
-Non-normality
-=============
+### Influence Plots
 
-```{r}
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+# Influence Plot 
+influencePlot(fit1,id.method="identify", 
+main="Influence Plot", 
+col="red",
+sub="Circle size is proportial to Cook's Distance" )
 
-# Normality of Residuals
-# qq plot for studentized resid
-qqPlot(fit1, main="QQ Plot")
 ```
+---
 
 
-```{r}
-# distribution of studentized residuals
-library(MASS)
-sresid <- studres(fit) 
-hist(sresid, freq=FALSE, 
-main="Distribution of Studentized Residuals")
-xfit<-seq(min(sresid),max(sresid),length=40) 
-yfit<-dnorm(xfit) 
-lines(xfit, yfit)
-```
 
-Non-constant Error Variance
-==================================
+### Non-constant Error Variance
+
 
 ```{r}
 
@@ -244,12 +323,22 @@ Non-constant Error Variance
 ncvTest(fit)
 ```
 
-Non-constant Error Variance
-==================================
+---
 
-```{r}
+### Non-constant Error Variance
+
+```{r eval=FALSE}
 # plot studentized residuals vs. fitted values 
 spreadLevelPlot(fit)
 ```
 
+---
 
+### Non-constant Error Variance
+
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+# plot studentized residuals vs. fitted values 
+spreadLevelPlot(fit)
+```
+
+---

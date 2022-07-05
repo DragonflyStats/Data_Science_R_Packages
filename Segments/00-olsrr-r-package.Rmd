@@ -1,18 +1,23 @@
-
+---
+title: "OSUN R Users Community"
+subtitle: "Kevin O'Brien"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      countIncrementalSlides: false
+---
 
 ```{r include=FALSE, echo=FALSE}
-library(knitr)
-library(broom)
+library(tidyverse)
 library(magrittr)
-CheesesData <- read.csv("C:/Users/Kevin/Documents/Ghana_R_Users/Cheeses.csv")
+library(faraway)
+library(knitr)
+data(cheddar)
 
-head(CheesesData)
 
-Fit_1 <- lm(Taste ~ Acetic + Lactic, data = CheesesData)
-Fit_2 <- lm(Taste ~ Acetic + H2S, data = CheesesData)
-Fit_3 <- lm(Taste ~ H2S + Lactic, data = CheesesData)
 
-Fit_4 <- lm(Taste ~ Acetic + H2S + Lactic, data = CheesesData)
 ```
 
 
@@ -20,15 +25,19 @@ Fit_4 <- lm(Taste ~ Acetic + H2S + Lactic, data = CheesesData)
 ```{r echo=FALSE, include=FALSE}
 library(olsrr)
 
-Fit_1 <- lm(Taste ~ Acetic + Lactic, data = CheesesData)
-Fit_2 <- lm(Taste ~ Acetic + H2S, data = CheesesData)
-Fit_3 <- lm(Taste ~ H2S + Lactic, data = CheesesData)
+Fit_1 <- lm(taste ~ Acetic + Lactic, data = cheddar)
 
-Fit_4 <- lm(Taste ~ Acetic + H2S + Lactic, data = CheesesData)
+Fit_2 <- lm(taste ~ Acetic + H2S, data = cheddar)
+
+Fit_3 <- lm(taste ~ H2S + Lactic, data = cheddar)
+
+Fit_4 <- lm(taste ~ Acetic + H2S + Lactic, data = cheddar)
 ```
+
 
 olsrr
 ===================================
+
 ###{olsrr} 
 
 #### Tools for Building OLS Regression Models
@@ -39,25 +48,26 @@ olsrr
 
 (Source: CRAN)
 
+---
 
-Diagnostics panel
-=============================================
- 
+### Diagnostics panel
+
 Panel of plots for regression diagnostics.
 
-<pre><code>
+```{r eval=FALSE}
 
 ols_plot_diagnostics(model)
 
-</code></pre>
+```
 
 #### Arguments 
  
-* ``model``: An object of class lm.
+* ***model***: An object of class lm.
 
 
-Diagnostics panel
-=============================================
+---
+
+### Diagnostics panel
 
 
 ```{r include=FALSE,include=TRUE} 
@@ -66,39 +76,43 @@ ols_plot_diagnostics(model)
 ```
 
 
+---
 
+### Residual QQ plot
 
-``Residual QQ plot``
-=============================================
 #### Description 
  
 Graph for detecting violation of normality assumption.
 
  
-<pre><code>
+```{r eval=FALSE}
 ols_plot_resid_qq(model)
-</code></pre>
+```
+
+---
 
 
-Residual QQ plot
-=============================================
+### Residual QQ plot
 
 ```{r} 
 ols_plot_resid_qq(model)
 ```
 
+---
 
-***ols_plot_resid_box()***
-=================================================
+### <tt>ols_plot_resid_box()</tt>
+
  
 Box plot of residuals to examine if residuals are normally distributed.
 
  
 
-<pre><code>
+```{r eval=FALSE}
 ols_plot_resid_box(model)
-</code></pre>
+```
 
+
+---
 
 ***ols_plot_resid_box()***
 =================================================
@@ -108,6 +122,7 @@ ols_plot_resid_box(model)
 ols_plot_resid_box(model)
 ```
 
+---
 
 Breusch pagan test
 =================================================
@@ -117,25 +132,24 @@ Breusch pagan test
 Test for constant variance. It assumes that the error terms are normally distributed.
 
  
-<pre><code>
+```{r eval=FALSE}
 
 ols_test_breusch_pagan(model, fitted.values = TRUE, rhs = FALSE,
                        multiple = FALSE, 
                        p.adj = c("none", "bonferroni", "sidak", "holm"),
                        vars = NA)
-</code></pre>
+```
 
-Breusch pagan test
-=================================================
+### Breusch pagan test
 
 * Breusch Pagan Test was introduced by Trevor Breusch and Adrian Pagan in 1979. 
 * It is used to test for heteroscedasticity in a linear regression model. 
 * It tests whether variance of errors from a
 regression is dependent on the values of a independent variable.
 
-Breusch pagan test
-=================================================
+---
 
+### Breusch pagan test
 * Null Hypothesis: Equal/constant variances
 * Alternative Hypothesis: Unequal/non-constant variances
 Computation
@@ -144,13 +158,13 @@ Computation
 * Compute the test statistic. It follows a chi square distribution with $p -1$ degrees of freedom, where $p$ is
 the number of independent variables, n is the sample size and $R^2$ is the coefficient of determination.
 
-Breusch pagan test
-=================================================
+---
 
+### Breusch pagan test
 
 #### Value
 An object of
-class "``ols_test_breusch_pagan``" is a list containing the following components:
+class "<tt>ols_test_breusch_pagan</tt>" is a list containing the following components:
 
 * bp : breusch pagan statistic
 * p : p-value of bp
@@ -162,9 +176,9 @@ class "``ols_test_breusch_pagan``" is a list containing the following components
 * resp : response variable
 * preds : predictors
 
+---
 
-Breusch pagan test
-=================================================
+### Breusch pagan test
 
 ```{r} 
 # model
@@ -173,37 +187,35 @@ Breusch pagan test
 
 ols_test_breusch_pagan(model)
 ```
+---
 
-
-Breusch pagan test
-=================================================
+### Breusch pagan test
 
 ```{r} 
 # use independent variables of the model
 ols_test_breusch_pagan(model, rhs = TRUE)
 ```
+---
 
-Breusch pagan test
-=================================================
-
+### Breusch pagan test
 
 ```{r} 
 # use independent variables of the model and perform multiple tests
 ols_test_breusch_pagan(model, rhs = TRUE, multiple = TRUE)
 ```
 
-Breusch pagan test
-=================================================
+---
+
+### Breusch pagan test
 
 
 ```{r} 
 # bonferroni p value adjustment
 ols_test_breusch_pagan(model, rhs = TRUE, multiple = TRUE, p.adj = 'bonferroni')
 ```
+---
 
-Breusch pagan test
-=================================================
-
+### Breusch pagan test
 
 ```{r}
 # sidak p value adjustment
@@ -212,21 +224,25 @@ ols_test_breusch_pagan(model, rhs = TRUE, multiple = TRUE, p.adj = 'sidak')
 ols_test_breusch_pagan(model, rhs = TRUE, multiple = TRUE, p.adj = 'holm')
 ```
 
-``ols_aic`` Akaike information criterion
-=================================================
+---
+
+### <tt>ols_aic</tt> Akaike information criterion
+
 #### Description 
 
 Akaike information criterion for model selection.
 
  
-<pre><code>
+```{r eval=FALSE}
   
   ols_aic(model, method = c("R", "STATA", "SAS"))
 
-</code></pre>
+```
 
-``ols_aic`` Akaike information criterion
-=================================================
+---
+
+### <tt>ols_aic</tt>  Akaike information criterion
+
 #### Arguments 
   
 * model An object of class lm.
@@ -237,26 +253,27 @@ Akaike information criterion for model selection.
 * AIC provides a means for model selection. Given a collection of models for the data, AIC estimates the quality of each model, relative to each of the other models. 
 * R and STATA use loglikelihood to compute AIC. SAS uses residual sum of squares.
 
+---
 
+### <tt>ols_sbc</tt> Bayesian information criterion
 
-``ols_sbc`` Bayesian information criterion
-=================================================
 #### Description 
  
 Bayesian information criterion for model selection.
 
  
-<pre><code>
+```{r eval=FALSE}
 ols_sbc(model, method = c("R", "STATA", "SAS"))
-</code></pre>
+```
 
 #### Arguments
-* ``model``: An object of class lm.
-* ``method``: A character vector; specify the method to compute BIC. Valid options include
+* <tt>model</tt>: An object of class lm.
+* <tt>method</tt>: A character vector; specify the method to compute BIC. Valid options include
 R, STATA and SAS.
 
-ols_sbc Bayesian information criterion
-=================================================
+---
+
+### <tt>ols_sbc</tt> Bayesian information criterion
 
 ```{r} 
 # using R computation method
@@ -271,19 +288,18 @@ ols_sbc(model)
 # ols_sbc(model, method = 'SAS')
 ```
 
+---
 
-
-Cook's Distance
-================================================= 
+### Cook's Distance
 
 * Cook's distance was introduced by American statistician R Dennis Cook in 1977. 
 * It is used to
 identify influential data points. 
 * It depends on both the residual and leverage .
 
+---
 
-Cook's Distance
-=================================================
+### Cook's Distance
 
 Steps to compute Cook's distance:
 
@@ -294,51 +310,65 @@ Steps to compute Cook's distance:
 
 A data point having a large cook's d indicates that the data point strongly influences the fitted values.
 
+---
 
+### Cooks' D bar plot
 
-Cooks' D bar plot
-=================================================
 #### Description 
  
 Bar Plot of cook's distance to detect observations that strongly influence fitted values of the model.
 
  
-<pre><code>
+```{r eval=FALSE}
 
 ols_plot_cooksd_bar(model)
 
-</code></pre>
+```
 
 
+---
 
-Cook's distance:
-=================================================
+### Cook's distance:
 
-``ols_plot_cooksd_bar`` returns a list containing the following components:
+<tt>ols_plot_cooksd_bar</tt> returns a list containing the following components:
 
-*  ***outliers***: a tibble with observation number and cooks distance that exceed threshold
+* ***outliers***: a tibble with observation number and cooks distance that exceed threshold
 * ***threshold***: threshold for classifying an observation as an outlier
 
-Cook's distance:
-=================================================
-
-
- 
-```{r ,out.width = "80%" }
+```{r eval=FALSE}
 
 ols_plot_cooksd_bar(model)
 ```
 
-Cook's distance:
-=================================================
-
-```{r ,out.width = "80%" }
+```{r eval=FALSE }
 
 ols_plot_cooksd_chart(model)
 ```
 
-DFBETa:
-=================================================
+
+---
+
+### Cook's distance:
+
+
+ 
+```{r echo=FALSE,out.width = "80%" }
+
+ols_plot_cooksd_bar(model)
+```
+
+---
+
+### Cook's distance:
+
+```{r echo=FALSE,out.width = "80%" }
+
+ols_plot_cooksd_chart(model)
+```
+
+---
+
+### DFBETa:
 
 
 #### Description 
@@ -346,15 +376,18 @@ DFBETa:
 Panel of plots to detect influential observations using DFBETAs.
 
  
-<pre><code>
+```{r eval=FALSE}
 
 ols_plot_dfbetas(model)
 
-</code></pre>
+```
 
 #### Arguments 
  
 * ``model``: An object of class lm.
+
+
+---
 
 #### Details 
  
@@ -363,24 +396,25 @@ ols_plot_dfbetas(model)
 * In general, large values of DFBETAS indicate observations that are influential in estimating a given parameter. 
 * Belsley, Kuh, and Welsch recommend 2 as a general cutoff value toindicate influential observations and well as an alternative size-adjusted cutoff.
 
-
+---
 
 ```{r ,out.width = "80%" }
 ols_plot_dfbetas(model)
 ```
 
+---
 
-olsrr: Leverage
-===========================================
+### olsrr: Leverage
+
  
 The leverage of an observation is based on how much the observation's value on the predictor variable differs from the mean of the predictor variable. The greater an observation's leverage, the more potential it has to be an influential observation.
 
  
-<pre><code>
+```{r eval=FALSE}
 
 ols_leverage(model)
 
-</code></pre>
+```
 
 #### Arguments 
  
@@ -392,37 +426,33 @@ ols_leverage(model)
 ols_leverage(model)
 ```
 
+---
 
+### Studentized residuals vs leverage plot
 
- Studentized residuals vs leverage plot
-=============================================================
-#### Description 
  
 Graph for detecting outliers and/or observations with high leverage.
 
  
-<pre><code>
+```{r eval=FALSE}
 
 ols_plot_resid_lev(model)
 
-</code></pre>
+```
 
+---
 
-Studentized residuals vs leverage plot
-=============================================================
+### Studentized residuals vs leverage plot
 
- 
 
 ```{r ,out.width = "80%" }
 ols_plot_resid_lev(model)
 ```
 
+---
 
+### olsrr: PRESS
 
-olsrr: PRESS
-===========================================
-#### Description 
- 
 PRESS (prediction sum of squares) tells you how well the model will predict new data.
 
 
@@ -435,16 +465,19 @@ ability.
 
 
 #### Usage 
-<pre><code>
+```{r eval=FALSE}
 
 ols_press(model)
-</code></pre>
+```
 
 
 
 
-Collinearity diagnostics
-===============================================================
+---
+
+### Collinearity diagnostics
+
+
 #### Collinearity
 
 Variance inflation factor, tolerance, eigenvalues and condition indices.
@@ -458,19 +491,19 @@ involves more than two variables.
 * In the presence of multicollinearity, regression estimates
 are unstable and have high standard errors.
 
-Collinearity diagnostics
-===============================================================
- 
+---
+
+### Collinearity diagnostics
 
 
-* ``ols_coll_diag(model)``
-* ``ols_vif_tol(model)``
-* ``ols_eigen_cindex(model)``
 
+* <tt>ols_coll_diag(model)</tt>
+* <tt>ols_vif_tol(model)</tt>
+* <tt>ols_eigen_cindex(model)</tt>
 
- Collinearity diagnostics
-===============================================================
+---
 
+### Collinearity diagnostics
 
 ```{r} 
 
@@ -479,8 +512,9 @@ ols_vif_tol(model)
 
 ```
 
-Collinearity diagnostics
-==============================================================
+---
+
+### Collinearity diagnostics
 
 
 ```{r} 
@@ -492,8 +526,9 @@ ols_eigen_cindex(model) %>%
 
 ```
 
-Collinearity diagnostics
-===============================================================
+---
+
+### Collinearity diagnostics
 
 
 ```{r}

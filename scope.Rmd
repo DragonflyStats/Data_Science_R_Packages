@@ -10,19 +10,43 @@ output:
 ---
 
 ### Scope
- - Mainly focussing on item-wise diagnostics 
+
+Machine Learning - types of analysis
+
+#### Many Types of ML Problems
+* Clustering 
+* Classification
+* Regression
 
 
-### Out of Scope
- - Not going into Feature Selection in Details
- - One-hot Encooding / Model Matrices
- - Log Transformation
- - Box-Cox Transformation
+#### Focus on Regression
 
+* Predicting a numeric value based on predictors
+* Can easily generalize most of the content to all Linear Models (ANOVA)
+---
+
+
+### Scope
+ - Mainly focusing on item-wise diagnostics 
+
+
+#### Feature Engineering
+
+Not Covering This - but it is important
+
+* Normalisation
+* Scaling
+* One-hot Encoding / Model Matrices
+* Log Transformation
+* Box-Cox Transformation
+
+
+* {caret} package
 
 ---
 
 ### {yardstick}
+(**Digression**)
 
 Not Really Covering Machine Learning or Binary Classifers
  

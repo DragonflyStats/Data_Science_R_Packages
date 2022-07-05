@@ -8,7 +8,8 @@ output:
       highlightStyle: github
       countIncrementalSlides: false
 ---
-
+Model Assumptions
+==========================
 The Distribution of Dependent Variables
 
 *  The assumptions of normality and homogeneity of variance for linear models are not about Y, the dependent variable.  
