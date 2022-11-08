@@ -17,6 +17,10 @@ library(lindia)
 
 ```
 
+---
+
+### Cars 93 Data
+
 ```{r}
 
 library(MASS)

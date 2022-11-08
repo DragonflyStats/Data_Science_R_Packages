@@ -67,6 +67,8 @@ plot.light_performance.
 #### Examples
 ```{r}
 
+library(flashlight)
+
 fit_full <- lm(Sepal.Length ~ ., data = iris)
 fit_part <- lm(Sepal.Length ~ Petal.Length, data = iris)
 mod_full <- flashlight(model = fit_full, label = "full", data = iris, y = "Sepal.Length")
