@@ -1,0 +1,33 @@
+---
+title: "``ds_percentiles``: Percentiles"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(descriptr)
+```
+
+
+
+
+#### Description 
+ 
+Returns the percentiles
+
+#### Usage 
+<pre><code>
+
+ds_percentiles(data, column)
+
+</code></pre>
+#### Arguments 
+ 
+* ``data`` : A data.frame or tibble.
+* ``column`` :  Column in data.
+
+#### Examples 
+```{r}
+
+ds_percentiles(mtcarz, mpg)
+```

@@ -1,0 +1,16 @@
+
+
+theme_elements ggplot2 theme attribute inheritance network (directed)
+#### Description
+A list of two datasets, vertices and edges, containing data on the inheritance structure of theme elements in ggplot2 (see http://docs.ggplot2.org/current/theme.html) The variables are as follows:
+
+#### Usage
+theme_elements
+
+#### Format
+A list of two data frames:
+• the edges data frame consists of two variables of length 48:
+– child: Theme element that inherits its properties from the corresponding parent element
+– parent: Theme element that passes its properties to its children
+• the vertices data frame consists of one variable with information on 53 theme elements:
+– name: Name of the theme element

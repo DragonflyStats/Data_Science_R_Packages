@@ -1,0 +1,32 @@
+---
+title: "``ds_extreme_obs``"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(descriptr)
+```
+
+### Extreme observations
+
+#### Description 
+ 
+Returns the most extreme observations.
+
+#### Usage 
+<pre><code>
+
+ds_extreme_obs(data, column)
+
+</code></pre>
+#### Arguments 
+ 
+* ``data`` : A data.frame or tibble.
+* ``column`` :  Column in data.
+
+#### Examples 
+```{r}
+
+ds_extreme_obs(mtcarz, mpg)
+```

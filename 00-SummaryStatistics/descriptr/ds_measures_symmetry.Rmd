@@ -1,0 +1,30 @@
+---
+title: "``ds_measures_symmetry``:   Measures of symmetry"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(descriptr)
+```
+
+#### Description 
+ 
+Returns the measures of symmetry such as skewness and kurtosis.
+
+#### Usage 
+<pre><code>
+
+ds_measures_symmetry(data, column)
+
+</code></pre>
+#### Arguments 
+ 
+* ``data`` : A data.frame or tibble.
+* ``column`` :  Column in data.
+
+#### Examples 
+```{r}
+
+ds_measures_symmetry(mtcarz, mpg)
+```

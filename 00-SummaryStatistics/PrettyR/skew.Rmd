@@ -1,0 +1,29 @@
+---
+title: "prettyr::skew "
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(prettyR)
+```
+
+skew Calculate the skew of a distribution.
+
+#### Description
+Calculates the skew of a distribution using a simple formula.
+
+#### Usage
+<pre><code>
+skew(x)
+</code></pre>
+
+#### Arguments 
+* ``x``: A vector of numeric values, supposedly drawn from a particular distribution.
+
+#### Details
+‘skew’ calculates the asymmetry of the distribution of the values.
+
+#### Value
+The value calculated.
+

@@ -1,0 +1,31 @@
+---
+title: "``ds_std_error``"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(descriptr)
+```
+
+ Standard error of mean
+
+#### Description 
+ 
+Returns the standard error of mean.
+
+#### Usage 
+<pre><code>
+
+ds_std_error(x)
+
+</code></pre>
+#### Arguments 
+ 
+* ``x``: a numeric vector.
+
+#### Examples 
+```{r}
+
+ds_std_error(mtcars$mpg)
+```

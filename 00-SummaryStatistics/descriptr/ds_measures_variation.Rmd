@@ -1,0 +1,32 @@
+---
+title: "``ds_measures_variation``"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(descriptr)
+```
+
+ds_measures_variation Measures of variation
+
+#### Description 
+ 
+Returns the measures of location such as range, variance and standard deviation.
+
+#### Usage 
+<pre><code>
+
+ds_measures_variation(data, column)
+
+</code></pre>
+#### Arguments 
+ 
+* ``data`` : A data.frame or tibble.
+* ``column`` :  Column in data.
+
+#### Examples 
+```{r}
+ds_measures_variation(mtcarz, mpg)
+```
+
